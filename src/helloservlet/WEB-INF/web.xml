@@ -7,15 +7,33 @@
   <!-- To save as <CATALINA_HOME>\webapps\helloservlet\WEB-INF\web.xml -->
  
    <servlet>
+    <servlet-name>solr</servlet-name>
+    <servlet-class>org.mitre.dsmiley.httpproxy.ProxyServlet</servlet-class>
+    <init-param>
+      <param-name>targetUri</param-name>
+      <param-value>http://google.com/</param-value>
+    </init-param>
+    <init-param>
+      <param-name>log</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>solr</servlet-name>
+    <url-pattern>/sayhello</url-pattern>
+  </servlet-mapping>
+ <!--
+   <servlet>
       <servlet-name>HelloWorldServlet</servlet-name>
       <servlet-class>mypkg.HelloServlet</servlet-class>
    </servlet>
  
-   <!-- Note: All <servlet> elements MUST be grouped together and
-         placed IN FRONT of the <servlet-mapping> elements -->
+   Note: All <servlet> elements MUST be grouped together and
+         placed IN FRONT of the <servlet-mapping> elements
  
    <servlet-mapping>
       <servlet-name>HelloWorldServlet</servlet-name>
       <url-pattern>/sayhello</url-pattern>
    </servlet-mapping>
+  -->
 </web-app>
