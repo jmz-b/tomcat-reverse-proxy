@@ -1,7 +1,32 @@
 version: '3'
 
 services:
-  proxy:
+  pdp-server:
+    image: registry.gitlab.com/asclepios-project/abac-authorization/abac-server:latest
+    volumes:
+      - abac_conf:/abac-server/config
+      - abac_policies:/abac-server/policies
+      - abac_logs:/abac-server/logs    
+    #ports:
+    #  - "7071:7071"
+    expose:
+      - "7071"
+
+  ample-editor:
+    image: registry.gitlab.com/asclepios-project/ample-editor
+    volumes:
+      - ample_conf:/ample/conf
+      - ample_DB:/ample/DB
+      - ample_logs:/ample/logs
+#    environment:
+#      - ABAC_SERVER_HOST=${ABAC_SERVER_HOST}
+#      - ABAC_SERVER_API_KEY=${ABAC_SERVER_API_KEY}    
+    #ports:
+    #  - "9090:9090"
+    expose:
+      - "9090"
+
+  tomcat-proxy:
     build: .
     volumes:
       - ./src:/usr/local/tomcat/webapps
@@ -12,9 +37,15 @@ services:
       APP_CLASS: 'mypkg'
     command: [ "run.sh" ]
 
-  service:
-    image: python
-    command: ["/usr/local/bin/python3", "-m", "http.server"]
+  web1:
+    build: ./django-application/
     expose:
       - "8000"
 
+volumes:
+  abac_conf:
+  abac_policies:
+  abac_logs:
+  ample_conf:
+  ample_DB:
+  ample_logs:
