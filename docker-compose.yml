@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  serve:
+  proxy:
     build: .
     volumes:
       - ./src:/usr/local/tomcat/webapps
@@ -11,3 +11,10 @@ services:
       APP_NAME: 'helloservlet'
       APP_CLASS: 'mypkg'
     command: [ "run.sh" ]
+
+  service:
+    image: python
+    command: ["/usr/local/bin/python3", "-m", "http.server"]
+    expose:
+      - "8000"
+
