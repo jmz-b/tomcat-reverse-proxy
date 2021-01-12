@@ -7,7 +7,7 @@
   <!-- To save as <CATALINA_HOME>\webapps\helloservlet\WEB-INF\web.xml -->
  
    <servlet>
-    <servlet-name>solr</servlet-name>
+    <servlet-name>ABAC-proxy</servlet-name>
     <servlet-class>org.mitre.dsmiley.httpproxy.ProxyServlet</servlet-class>
     <init-param>
       <param-name>targetUri</param-name>
@@ -19,22 +19,19 @@
     </init-param>
   </servlet>
   <servlet-mapping>
-    <servlet-name>solr</servlet-name>
+    <servlet-name>ABAC-proxy</servlet-name>
     <url-pattern>/sayhello</url-pattern>
   </servlet-mapping>
 
- <!--
-   <servlet>
-      <servlet-name>HelloWorldServlet</servlet-name>
-      <servlet-class>mypkg.HelloServlet</servlet-class>
-   </servlet>
- 
-   Note: All <servlet> elements MUST be grouped together and
-         placed IN FRONT of the <servlet-mapping> elements
- 
-   <servlet-mapping>
-      <servlet-name>HelloWorldServlet</servlet-name>
-      <url-pattern>/sayhello</url-pattern>
-   </servlet-mapping>
-  -->
+  
+  <filter>
+    <filter-name>AsclepiosAbacFilter</filter-name>
+    <filter-class>eu.asclepios.authorization.abac.client.AuthorizationServiceServletFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+      <filter-name>AsclepiosAbacFilter</filter-name>
+      <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
 </web-app>
