@@ -3,9 +3,6 @@ FROM tomcat:9.0
 WORKDIR /usr/local/tomcat/lib
 COPY abac-authorization-client-for-tomcat-1.0.0-SNAPSHOT-jar-with-dependencies.jar abac-authorization-client-for-tomcat-1.0.0-SNAPSHOT-jar-with-dependencies.jar
 
-WORKDIR /usr/local/tomcat
-COPY truststore-client.p12 truststore-client.p12
-
 WORKDIR /usr/local/tomcat/bin
 COPY run.sh run.sh
 

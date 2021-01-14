@@ -21,6 +21,8 @@ services:
       AZ_CALL_DISABLED: "false"
       AZ_CALL_LOAD_BALANCE_METHOD: ORDER
       AZ_CALL_RETRIES: 1
+    volumes:
+      - truststore-client.p12:/usr/local/tomcat/truststore-client.p12
     command: [ "run.sh" ]
 
   pdp-server:
